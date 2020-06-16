@@ -49,6 +49,7 @@ fn crush(sample: f32, bit_depth: f32, mode: CrushMode) -> f32 {
 
 	return min + ((1.0_f32 + sample) / step_size).floor() * step_size;
 }
+
 #[derive(Copy, Clone, PartialEq)]
 #[repr(i64)]
 pub enum CrushMode {
@@ -143,4 +144,56 @@ pub unsafe extern "C" fn get_bit_depth_ptr(me: *mut Bitcrusher) -> *mut f32 {
 #[no_mangle]
 pub unsafe extern "C" fn set_mode(me: *mut Bitcrusher, mode: i32) {
 	(*me).mode = CrushMode::from_i32(mode)
+}
+
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+
+	#[test]
+	fn crush_results_in_bounds() {
+		let cases = [
+			[1.0, 1.2],
+			[2.0, 1.2],
+			[-1.0, 1.2],
+			[1.2, 1.2],
+			[-1.2, 1.2],
+			[1.0, 1.9],
+			[-1.0, 1.9],
+			[1.9, 1.9],
+			[-1.9, 1.9],
+			[1.01, 2.9],
+			[-1.01, 2.9],
+			[-1.02, 2.9],
+			[-0.99, 4.9],
+			[-0.99, 2.1],
+			[-1.0, 1.9],
+			[-0.99, 1.9],
+		];
+		for [input, bit_depth] in cases.iter() {
+			for mode_code in 0..2 {
+				let mode = CrushMode::from_i32(mode_code);
+				let crushed_sample = crush(*input, *bit_depth, mode);
+				assert_eq!(
+					crushed_sample < 1.0,
+					true,
+					"upper bound check for input {} at depth {} and mode {} returned {}",
+					*input,
+					*bit_depth,
+					mode_code,
+					crushed_sample
+				);
+				assert_eq!(
+					crushed_sample >= -1.0,
+					true,
+					"lower bound check for input {} at depth {} and mode {} returned {}",
+					*input,
+					*bit_depth,
+					mode_code,
+					crushed_sample
+				);
+			}
+		}
+	}
 }
