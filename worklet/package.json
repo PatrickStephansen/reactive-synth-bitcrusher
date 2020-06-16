@@ -1,6 +1,6 @@
 {
   "name": "reactive-synth-bitcrusher",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "bitcrusher module as an AudioWorkletProcessor",
   "main": "bitcrusher.js",
   "files": [
