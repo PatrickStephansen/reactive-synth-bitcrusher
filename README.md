@@ -1,5 +1,8 @@
 # reactive-synth-bitcrusher
-WASM implementation of a bitcrusher audio processing node compatible with the web audio API
+
+WASM implementation of a bitcrusher audio processing node compatible with the web audio API. Created for [reactive-synth](https://github.com/PatrickStephansen/reactive-synth), but usable elsewhere if I ever document how.
+
+The bitcrusher is AudioWorkletProcessor that reduces precision at sample level imitating a storage format with less bits available for storing each sample. Different modes change the behaviour for non-whole-number bit depths.
 
 ## build
 
@@ -17,3 +20,11 @@ twiggy top -n 20 target/wasm32-unknown-unknown/release/reactive_synth_bitcrusher
 ```
 
 Run `npm link` from the worklet directory before trying to build the reactive-synth app (the dependent app not in this repo)
+
+## test
+
+`cargo test`
+
+## usage example
+
+Test harness page coming soon. For now see the real use in [reactive-synth](https://github.com/PatrickStephansen/reactive-synth).
