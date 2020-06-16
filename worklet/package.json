@@ -2,7 +2,11 @@
   "name": "reactive-synth-bitcrusher",
   "version": "1.0.0",
   "description": "bitcrusher module as an AudioWorkletProcessor",
-  "main": "index.js",
+  "main": "bitcrusher.js",
+  "files": [
+    "bitcrusher.js",
+    "reactive_synth_bitcrusher.wasm"
+  ],
   "scripts": {
     "test": "jest",
     "build": "webpack"
@@ -21,11 +25,5 @@
   "bugs": {
     "url": "https://github.com/PatrickStephansen/reactive-synth-bitcrusher/issues"
   },
-  "homepage": "https://github.com/PatrickStephansen/reactive-synth-bitcrusher#readme",
-  "devDependencies": {
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^6.0.2",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
-  }
+  "homepage": "https://github.com/PatrickStephansen/reactive-synth-bitcrusher#readme"
 }

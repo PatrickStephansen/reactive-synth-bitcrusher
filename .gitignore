@@ -16,3 +16,4 @@ Cargo.lock
 
 # node modules
 node_modules/
+worklet/*.wasm
