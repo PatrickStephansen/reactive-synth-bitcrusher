@@ -2,7 +2,7 @@
 
 WASM implementation of a bitcrusher audio processing node compatible with the web audio API. Created for [reactive-synth](https://github.com/PatrickStephansen/reactive-synth), but usable elsewhere if I ever document how.
 
-The bitcrusher is AudioWorkletProcessor that reduces precision at sample level imitating a storage format with less bits available for storing each sample. Different modes change the behaviour for non-whole-number bit depths.
+The bitcrusher is an AudioWorkletProcessor that reduces precision at sample level imitating a storage format with less bits available for storing each sample. Different modes change the behaviour for real number bit depths between each whole number.
 
 ## build
 
