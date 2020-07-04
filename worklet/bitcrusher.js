@@ -10,8 +10,8 @@ registerProcessor(
 					defaultValue: 8,
 					minValue: 1,
 					maxValue: 32,
-					automationRate: "a-rate"
-				}
+					automationRate: "a-rate",
+				},
 			];
 		}
 		constructor() {
@@ -21,7 +21,7 @@ registerProcessor(
 			this.fractionalBitDepthModes = {
 				trve: 0,
 				"quantize-evenly": 1,
-				continuous: 2
+				continuous: 2,
 			};
 		}
 
@@ -37,7 +37,9 @@ registerProcessor(
 				);
 			}
 			if (event.data && event.data.type === "wasm") {
-				this.initWasmModule(event.data.wasmModule);
+				this.initWasmModule(event.data.wasmModule).then(() =>
+					this.port.postMessage({ type: "module-ready", value: true })
+				);
 			}
 		}
 
