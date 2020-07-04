@@ -37,13 +37,12 @@ registerProcessor(
 				);
 			}
 			if (event.data && event.data.type === "wasm") {
-				this.initWasmModule(event.data.wasmBinary);
+				this.initWasmModule(event.data.wasmModule);
 			}
 		}
 
-		async initWasmModule(binary) {
-			const compiledModule = await WebAssembly.compile(binary);
-			this.wasmModule = await WebAssembly.instantiate(compiledModule, {});
+		async initWasmModule(wasmModule) {
+			this.wasmModule = await WebAssembly.instantiate(wasmModule, {});
 			this.internalProcessorPtr = this.wasmModule.exports.init(
 				128,
 				this.fractionalBitDepthModes[this.fractionalBitDepthMode]

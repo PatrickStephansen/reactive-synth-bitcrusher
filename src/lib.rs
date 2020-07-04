@@ -103,11 +103,6 @@ impl Bitcrusher {
 	pub fn get_output(&self) -> *const f32 {
 		self.output.as_ptr()
 	}
-
-	pub fn set_inputs(&mut self, input: Vec<f32>, bit_depth: Vec<f32>) {
-		self.input = input;
-		self.bit_depth = bit_depth;
-	}
 }
 
 #[no_mangle]
@@ -145,7 +140,6 @@ pub unsafe extern "C" fn get_bit_depth_ptr(me: *mut Bitcrusher) -> *mut f32 {
 pub unsafe extern "C" fn set_mode(me: *mut Bitcrusher, mode: i32) {
 	(*me).mode = CrushMode::from_i32(mode)
 }
-
 
 #[cfg(test)]
 mod tests {

@@ -8,8 +8,7 @@
     "reactive_synth_bitcrusher.wasm"
   ],
   "scripts": {
-    "test": "jest",
-    "build": "webpack"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
