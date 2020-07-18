@@ -56,7 +56,7 @@ registerProcessor(
 
 		process(inputs, outputs, parameters) {
 			// only process once wasm module ready and input plugged in
-			if (inputs[0][0].length && this.wasmModule) {
+			if (inputs[0] && inputs[0][0] && inputs[0][0].length && this.wasmModule) {
 				this.float32WasmMemory.set(
 					inputs[0][0],
 					this.wasmModule.exports.get_input_ptr(this.internalProcessorPtr) /
