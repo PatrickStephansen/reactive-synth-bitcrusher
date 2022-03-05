@@ -44,6 +44,7 @@ registerProcessor(
 		}
 
 		async initWasmModule(wasmModule) {
+			wasmModule = await WebAssembly.compile(wasmModule);
 			this.wasmModule = await WebAssembly.instantiate(wasmModule, {});
 			this.internalProcessorPtr = this.wasmModule.exports.init(
 				128,
